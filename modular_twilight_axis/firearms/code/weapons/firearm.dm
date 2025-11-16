@@ -36,6 +36,8 @@
 	switch(gunpowder)
 		if("fyrepowder")
 			. += span_bold("Поджигает цель при попадании.")
+		if("holy fyrepowder")
+			. += span_bold("Поджигает цель святым огнем при попадании. Эффект усилен против нежити.")
 		if("thunderpowder")
 			. += span_bold("Оглушает цель на короткое время при попадании.")
 		if("corrosive gunpowder")
@@ -80,6 +82,13 @@
 	icon_state = "powderflask_arcyne"
 	gunpowder = "arcyne gunpowder"
 	charges = 10
+
+/obj/item/twilight_powderflask/holyfyre
+	name = "powderflask"
+	desc = "Пороховница, предназначенная для удобной перезарядки огнестрельного оружия. Содержит порох священного огня, благословленный осколком кометы Сион, чтобы беспощадно разить врагов Всеотца."
+	icon_state = "powderflask_holyfyre"
+	gunpowder = "holy fyrepowder"
+	charges = 16
 
 /obj/effect/particle_effect/smoke/arquebus
 	name = "smoke"
@@ -193,7 +202,7 @@
 		fire_sound = "modular_twilight_axis/firearms/sound/umbra_fire.ogg"
 	else
 		switch(gunpowder)
-			if("fyrepowder")
+			if("fyrepowder" || "holy fyrepowder")
 				fire_sound = pick("modular_twilight_axis/firearms/sound/fyrepowder/arquefire.ogg", "modular_twilight_axis/firearms/sound/fyrepowder/arquefire2.ogg", "modular_twilight_axis/firearms/sound/fyrepowder/arquefire3.ogg",
 							"modular_twilight_axis/firearms/sound/fyrepowder/arquefire4.ogg", "modular_twilight_axis/firearms/sound/fyrepowder/arquefire5.ogg")
 			if("thunderpowder")
@@ -332,7 +341,7 @@
 			return
 		else
 			switch(W.gunpowder)
-				if("fyrepowder")
+				if("fyrepowder" || "holy fyrepowder")
 					playsound(src, "modular_twilight_axis/firearms/sound/fyrepowder/pour_powder.ogg",  100, FALSE)
 				if("thunderpowder")
 					playsound(src, "modular_twilight_axis/firearms/sound/thunderpowder/pour_powder.ogg",  100, FALSE)
@@ -511,9 +520,6 @@
 		spread = 0
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
 		var/obj/projectile/bullet/BB = CB.BB
-		BB.damage *= damfactor * (user.STAPER > 10 ? user.STAPER / 10 : 1)
-		BB.critfactor *= critfactor
-		BB.gunpowder_npc_critfactor *= npcdamfactor
 		BB.gunpowder = gunpowder
 	reloaded = FALSE
 	if(advanced_icon)
@@ -526,7 +532,7 @@
 		..()
 		if(!silenced)
 			switch(gunpowder)
-				if("fyrepowder")
+				if("fyrepowder" || "holy fyrepowder")
 					spawn (5)
 						new/obj/effect/particle_effect/smoke/arquebus/fyre(get_ranged_target_turf(user, user.dir, 1))
 					spawn (10)
@@ -603,7 +609,7 @@
 				icon = advanced_icon_s
 			if(!silenced)
 				switch(gunpowder)
-					if("fyrepowder")
+					if("fyrepowder" || "holy fyrepowder")
 						spawn (1)
 							new/obj/effect/particle_effect/smoke/arquebus/fyre(get_ranged_target_turf(user, user.dir, 1))
 						spawn (5)
@@ -838,16 +844,14 @@
 
 /obj/item/gun/ballistic/twilight_firearm/handgonne/purgatory
 	name = "Purgatory"
-	desc = "Передовое огнестрельное оружие отавианского ордена Чёрного Пороха, завоевашее зловещую славу на поле боя из-за своей разрушительной мощи, обеспечиваемой двойным зарядом пороха и большим количеством картечи в залпе. Эта ручная пушка вступает в игру, когда одиночного довода против ереси просто недостаточно."
+	desc = "Передовое огнестрельное оружие отавианского ордена Чёрного Пороха, завоевашее зловещую славу на поле боя из-за своей разрушительной мощи. Эта ручная пушка вступает в игру, когда одиночного довода против ереси просто недостаточно."
 	icon = 'modular_twilight_axis/firearms/icons/purgatory/purgatory.dmi'
 	icon_state = "purgatory"
 	item_state = "purgatory"
-	mag_type = /obj/item/ammo_box/magazine/internal/twilight_firearm/handgonne/purgatory
 	advanced_icon = 'modular_twilight_axis/firearms/icons/purgatory/purgatory.dmi'
 	advanced_icon_r = 'modular_twilight_axis/firearms/icons/purgatory/purgatory_r.dmi'
 	advanced_icon_f	= 'modular_twilight_axis/firearms/icons/purgatory/purgatory_f.dmi'
 	advanced_icon_s = 'modular_twilight_axis/firearms/icons/purgatory/purgatory_s.dmi'
-	powder_per_reload = 2
 	gripped_intents = list(/datum/intent/shoot/twilight_firearm, /datum/intent/arc/twilight_firearm, INTENT_GENERIC, /datum/intent/spear/thrust/militia)
 	associated_skill = /datum/skill/combat/twilight_firearms
 	is_silver = TRUE
@@ -855,18 +859,3 @@
 	force_wielded = 20
 	wdefense = 5
 	match_delay = 8
-
-/obj/item/ammo_box/magazine/internal/twilight_firearm/handgonne/purgatory
-	name = "purgatory internal magazine"
-	caliber = "otavian grapeshot"
-
-/obj/item/gun/ballistic/twilight_firearm/handgonne/purgatory/ComponentInitialize()
-	AddComponent(\
-		/datum/component/silverbless,\
-		pre_blessed = BLESSING_PSYDONIAN,\
-		silver_type = SILVER_PSYDONIAN,\
-		added_force = 0,\
-		added_blade_int = 0,\
-		added_int = 0,\
-		added_def = 2,\
-	)

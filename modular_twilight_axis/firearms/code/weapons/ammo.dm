@@ -67,14 +67,6 @@
 	speed = 0.1
 	critfactor = 0.67
 
-/obj/projectile/bullet/twilight_grapeshot/otavian
-	name = "otavian grapeshot"
-	desc = "Плотно упакованный в бумагу набор небольших серебряных шариков. Хорошо сочетается с большими группами нечисти."
-	ammo_type = /obj/item/ammo_casing/caseless/twilight_cannonball/grapeshot/otavian
-	armor_penetration = 60
-	critfactor = 0.5
-	silver = TRUE
-
 /**
  * Special runelock ammo
  * Meant to be LIMITED, but reusable
@@ -106,13 +98,46 @@
 	silver = TRUE
 	blessed = TRUE
 
+/obj/projectile/bullet/fire(angle, atom/direct_target)
+	if(istype(fired_from, /obj/item/gun/ballistic/twilight_firearm))
+		var/obj/item/gun/ballistic/twilight_firearm/gun = fired_from
+		if(isliving(firer))
+			var/mob/living/L = firer
+			damage *= gun.damfactor * (L.STAPER > 10 ? L.STAPER / 10 : 1)
+		else
+			damage *= gun.damfactor
+		critfactor *= gun.critfactor
+		gunpowder_npc_critfactor *= gun.npcdamfactor
+		gunpowder = gun.gunpowder
+	..()
+
 /obj/projectile/bullet/on_hit(atom/target, blocked = FALSE)
 	if(isliving(target))
 		var/mob/living/T = target
 		if(!istype(T.get_inactive_held_item(), /obj/item/rogueweapon/shield) && !istype(T.get_active_held_item(), /obj/item/rogueweapon/shield) && (blocked == 0))
 			switch(gunpowder) //Hande gunpowder types that are BLOCKED by shields and armor
 				if("fyrepowder")
-					T.adjust_fire_stacks(round(4 * (damage / 100), 1))
+					if(istype(src, /obj/projectile/bullet/twilight_grapeshot))
+						T.adjust_fire_stacks(2)
+					else
+						T.adjust_fire_stacks(5)
+					T.ignite_mob()
+				if("holy fyrepowder")
+					if(HAS_TRAIT(T, TRAIT_SILVER_WEAK))
+						if(!T.has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder))
+							if(T.patron)
+								to_chat(T, span_danger("The trice-cursed Otavan silver! By [T.patron.name], it hurts!!"))
+							else
+								to_chat(T, span_danger("The trice-cursed Otavan silver! By all that's holy, it hurts!!"))
+						if(istype(src, /obj/projectile/bullet/twilight_grapeshot))
+							T.adjust_fire_stacks(2, /datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
+						else
+							T.adjust_fire_stacks(5, /datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
+					else
+						if(istype(src, /obj/projectile/bullet/twilight_grapeshot))
+							T.adjust_fire_stacks(2, /datum/status_effect/fire_handler/fire_stacks/divine)
+						else
+							T.adjust_fire_stacks(5, /datum/status_effect/fire_handler/fire_stacks/divine)
 					T.ignite_mob()
 				if("thunderpowder")
 					T.Immobilize(30)
@@ -193,6 +218,20 @@
 	switch(gunpowder)
 		if("fyrepowder")
 			explosion(T, devastation_range = 0, heavy_impact_range = 0, light_impact_range = 1, flame_range = 2, smoke = TRUE, soundin = pick('sound/misc/explode/bottlebomb (1).ogg','sound/misc/explode/bottlebomb (2).ogg'))
+		if("holy fyrepowder")
+			explosion(T, devastation_range = 0, heavy_impact_range = 0, light_impact_range = 1, smoke = TRUE, soundin = pick('sound/misc/explode/bottlebomb (1).ogg','sound/misc/explode/bottlebomb (2).ogg'))
+			for(var/mob/living/L in range(2, T))
+				if(!(L == target))
+					if(HAS_TRAIT(L, TRAIT_SILVER_WEAK))
+						if(!L.has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder))
+							if(L.patron)
+								to_chat(L, span_danger("The trice-cursed Otavan silver! By [L.patron.name], it hurts!!"))
+							else
+								to_chat(L, span_danger("The trice-cursed Otavan silver! By all that's holy, it hurts!!"))
+						L.adjust_fire_stacks(3, /datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
+					else
+						L.adjust_fire_stacks(3, /datum/status_effect/fire_handler/fire_stacks/divine)
+					L.ignite_mob()
 		if("corrosive gunpowder")
 			explosion(T, devastation_range = 0, heavy_impact_range = 0, light_impact_range = 1, smoke = TRUE, soundin = pick('sound/misc/explode/bottlebomb (1).ogg','sound/misc/explode/bottlebomb (2).ogg'))
 			for(var/mob/living/L in range(1, T)) //apply damage over time to mobs
@@ -265,18 +304,6 @@
 	projectile_type = /obj/projectile/bullet/twilight_lead/silver
 	icon_state = "musketball_silver"
 
-/obj/item/ammo_casing/caseless/twilight_lead/silver/ComponentInitialize()
-	. = ..()
-	AddComponent(\
-		/datum/component/silverbless,\
-		pre_blessed = BLESSING_NONE,\
-		silver_type = SILVER_TENNITE,\
-		added_force = 0,\
-		added_blade_int = 0,\
-		added_int = 0,\
-		added_def = 0,\
-	)
-
 /obj/item/ammo_casing/caseless/twilight_lead/runelock/blessed
 	name = "blessed sphere"
 	desc = "Небольшой, идеально круглый шар, изготовленный из чистого серебра. Такие боеприпасы создаются лучшими из отавианских кузнецов и освящяются лично Великим Магистром. Смертоностны против нежити, но весьма эффективны и против других еретиков."
@@ -307,13 +334,4 @@
 	dropshrink = 0.5
 	max_integrity = 0.1
 	pellets = 6
-	variance = 30
-
-/obj/item/ammo_casing/caseless/twilight_cannonball/grapeshot/otavian
-	name = "otavian grapeshot"
-	desc = "Плотно упакованный в бумагу набор небольших серебряных шариков. Хорошо сочетается с большими группами нечисти."
-	projectile_type = /obj/projectile/bullet/twilight_grapeshot/otavian
-	caliber = "otavian grapeshot"
-	icon_state = "grapeshot_silver"
-	pellets = 12
 	variance = 30
