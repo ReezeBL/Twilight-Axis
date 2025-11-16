@@ -39,7 +39,7 @@
 		if("holy fyrepowder")
 			. += span_bold("Поджигает цель святым огнем при попадании. Эффект усилен против нежити.")
 		if("thunderpowder")
-			. += span_bold("Оглушает цель на короткое время при попадании.")
+			. += span_bold("При попадании замедляет цель, а также оглушает её на короткий период.")
 		if("corrosive gunpowder")
 			. += span_bold("Покрывает цель кислотой, наносящей периодический урон броне и здоровью.")
 		if("arcyne gunpowder")
@@ -726,6 +726,16 @@
 	name = "decorated arquebus rifle"
 	desc = "Настоящее произведение искусства в обличии огнестрельного оружия. Приклад и цевье аркебузы украшены золотыми пластинами и инкрустированным рубином, а на стволе выбита надпись: «Взгляните на мои деянья и дрожите»."
 	icon = 'modular_twilight_axis/firearms/icons/decorated_arquebus.dmi'
+
+/obj/item/gun/ballistic/twilight_firearm/arquebus/jagerrifle
+	name = "Jägerbüchse"
+	desc = "Редкая разновидность колесцовой аркебузы, изготавливаемая мастерами Грензельхофта для егерей Фрейкорпс, отличившихся в ходе боевых действий. Легче и менее подвержена износу в сравнении с серийными образцами."
+	icon = 'modular_twilight_axis/firearms/icons/jagerrifle.dmi'
+
+/obj/item/gun/ballistic/twilight_firearm/arquebus/bayonet/jagerrifle
+	name = "Jägerbüchse"
+	desc = "Редкая разновидность колесцовой аркебузы, изготавливаемая мастерами Грензельхофта для егерей Фрейкорпс, отличившихся в ходе боевых действий. Легче и менее подвержена износу в сравнении с серийными образцами. Оснащена штыком для использования в ближнем бою."
+	icon = 'modular_twilight_axis/firearms/icons/jagerriflebayonet.dmi'
 
 /obj/item/gun/ballistic/twilight_firearm/arquebus_pistol
 	name = "arquebus pistol"
