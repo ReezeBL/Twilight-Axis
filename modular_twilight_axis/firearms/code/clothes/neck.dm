@@ -4,6 +4,7 @@
 	icon = 'modular_twilight_axis/firearms/icons/obj_neck.dmi'
 	mob_overlay_icon = 'modular_twilight_axis/firearms/icons/onmob_neck.dmi'
 	icon_state = "confessor_coif"
+	armor = ARMOR_PLATE
 	max_integrity = ARMOR_INT_SIDE_STEEL
 	resistance_flags = FIRE_PROOF
 	body_parts_inherent = NECK
