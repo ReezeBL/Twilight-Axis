@@ -12,9 +12,8 @@
 		STATKEY_INT = 1,
 	)
 	subclass_skills = list(
-		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
 		/datum/skill/combat/knives = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN, //чтобы отбиваться с аркебузой в мили
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/twilight_firearms = SKILL_LEVEL_MASTER,
 		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
