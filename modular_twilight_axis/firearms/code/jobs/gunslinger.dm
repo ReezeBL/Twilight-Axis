@@ -5,7 +5,7 @@
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/mercenary/twilight_gunslinger
 	maximum_possible_slots = 2
-	min_pq = 10
+	min_pq = 25 // Все мерки в данный момент с 25 открываются
 	cmode_music = 'modular_twilight_axis/firearms/sound/music/combat_gunslinger.ogg'
 	class_select_category = CLASS_CAT_OTAVA
 	category_tags = list(CTAG_MERCENARY)
@@ -16,15 +16,16 @@
 		STATKEY_STR = 1,
 		STATKEY_PER = 2,
 		STATKEY_CON = 1,
-		STATKEY_SPD = 2,
+		STATKEY_SPD = 1,
 		STATKEY_WIL = 2,
 	)
 	subclass_skills = list(
 		/datum/skill/combat/twilight_firearms = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/swords = SKILL_LEVEL_EXPERT,
-		/datum/skill/combat/knives = SKILL_LEVEL_JOURNEYMAN,
-		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/swords = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/knives = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/swimming = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
@@ -44,7 +45,7 @@
 		if("Lone Wolf")
 			H.set_blindness(0)
 			to_chat(H, span_warning("With no allegiance but to self, you travel through many different lands, finding yourself in employ of those who can afford to pay for your meals and ammunition. Working for the Guild is a novelty for you, but perhaps this is where you'll find a camaraderie you've never known?"))
-			H.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
+			H.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
 			beltl = /obj/item/quiver/twilight_bullet/lead
 			beltr = /obj/item/gun/ballistic/twilight_firearm/arquebus_pistol
 			backl = /obj/item/storage/backpack/rogue/satchel/black
