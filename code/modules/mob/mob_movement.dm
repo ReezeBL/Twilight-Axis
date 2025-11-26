@@ -779,15 +779,31 @@
 
 /mob/proc/toggle_eye_intent(mob/user) //clicking the fixeye button either makes you fixeye or clears your target
 	if(fixedeye)
-		fixedeye = 0
+		fixedeye = FALSE
+		tempfixeye = FALSE
 		if(!tempfixeye)
 			nodirchange = FALSE
-	else
-		fixedeye = 1
+	else if(!fixedeye)
+		fixedeye = TRUE
 		nodirchange = TRUE
 	for(var/atom/movable/screen/eye_intent/eyet in hud_used.static_inventory)
 		eyet.update_icon(src)
 	playsound_local(src, 'sound/misc/click.ogg', 100)
+
+/*/client/proc/hearglobalLOOC()
+	set category = "Prefs - Admin"
+	set name = "Show/Hide Global LOOC"
+	if(!holder)
+		return
+	if(!prefs)
+		return
+	prefs.chat_toggles ^= CHAT_ADMINLOOC
+	prefs.save_preferences()
+	if(prefs.chat_toggles & CHAT_ADMINLOOC)
+		to_chat(src, span_notice("I will now hear all LOOC chatter."))
+	else
+		to_chat(src, span_info("I will now only hear LOOC chatter around me."))*/ // Лоок вырезан. Не нужно.
+
 ///Moves a mob upwards in z level
 
 /mob/proc/ghost_up()
@@ -823,3 +839,6 @@
 // for mobs that are floating, flying, intangible, etc.
 /mob/proc/is_floor_hazard_immune()
 	return throwing || (movement_type & (FLYING|FLOATING))
+
+#undef MOVEMENT_DELAY_BUFFER
+#undef MOVEMENT_DELAY_BUFFER_DELTA

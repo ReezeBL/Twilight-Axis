@@ -9,6 +9,7 @@
 	icon = 'icons/roguetown/misc/foliage.dmi'
 	icon_state = "glowshroom1" //replaced in New
 	layer = ABOVE_NORMAL_TURF_LAYER
+	plane = GAME_PLANE
 	max_integrity = 30
 	blade_dulling = DULLING_CUT
 	resistance_flags = FLAMMABLE
@@ -110,3 +111,15 @@
 	var/obj/effect/decal/cleanable/molten_object/I = new (get_turf(src))
 	I.desc = ""
 	qdel(src)
+
+/obj/structure/glowshroom/dendorite // TA EDIT START
+	var/timeleft = 5 MINUTES
+
+/obj/structure/glowshroom/dendorite/Initialize()
+	. = ..()
+	if(timeleft)
+		QDEL_IN(src, timeleft)
+
+/obj/structure/glowshroom/dendorite/attackby(obj/item/W, mob/user, params)
+	// Dendorite glowshrooms don't electrocute when hit
+	. = ..() // TA EDIT END

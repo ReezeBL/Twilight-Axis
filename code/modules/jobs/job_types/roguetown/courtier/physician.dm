@@ -17,7 +17,7 @@
 	advclass_cat_rolls = list(CTAG_COURTPHYS = 2)
 
 	give_bank_account = TRUE
-	min_pq = 3 //Please don't kill the duke by operating on strong intent. Play apothecary until you're deserving of the great white beak of doom
+	min_pq = 5 //Please don't kill the duke by operating on strong intent. Play apothecary until you're deserving of the great white beak of doom
 	max_pq = null
 	round_contrib_points = 5
 
@@ -74,6 +74,7 @@
 	gloves = /obj/item/clothing/gloves/roguetown/leather
 	pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
+	saiga_shoes = /obj/item/clothing/shoes/roguetown/horseshoes
 	belt = /obj/item/storage/belt/rogue/leather/black
 	beltl = /obj/item/storage/belt/rogue/surgery_bag/full/physician
 	beltr = /obj/item/storage/keyring/physician

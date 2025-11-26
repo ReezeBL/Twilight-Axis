@@ -15,7 +15,7 @@
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = JDO_ARCHIVIST
 	give_bank_account = TRUE
-	min_pq = 1 // Please do not read smut while brewing bottle bombs. It upsets the maids when they have to scrape archivists off the ceiling.
+	min_pq = 2 // Please do not read smut while brewing bottle bombs. It upsets the maids when they have to scrape archivists off the ceiling.
 	max_pq = null
 	round_contrib_points = 3
 
@@ -66,13 +66,14 @@
 	subclass_skills = list(
 		/datum/skill/misc/reading = SKILL_LEVEL_LEGENDARY,
 		/datum/skill/craft/alchemy = SKILL_LEVEL_LEGENDARY,
+		/datum/skill/magic/arcane = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/riding = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_NOVICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/swimming = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/climbing = SKILL_LEVEL_NOVICE,
-		/datum/skill/magic/arcane = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/craft/tanning = SKILL_LEVEL_NOVICE,
 	)
 
 /datum/outfit/job/roguetown/archivist/basic/pre_equip(mob/living/carbon/human/H)

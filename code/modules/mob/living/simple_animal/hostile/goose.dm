@@ -147,7 +147,7 @@
 /mob/living/simple_animal/hostile/retaliate/goose/vomit/proc/vomit_preend()
 	for (var/obj/item/consumed in contents) //Get rid of any food left in the poor thing
 		barf_food(consumed, TRUE)
-		sleep(1)
+		stoplag(1)
 		if (QDELETED(src))
 			return
 	vomit_end()
@@ -202,3 +202,5 @@
 		vomit.vomitCoefficient = 1
 		vomit.vomitTimeBonus = 0
 	return TRUE
+
+#undef GOOSE_SATIATED

@@ -7,7 +7,7 @@
 	hud_possible = list(ANTAG_HUD)
 	hud_type = /datum/hud/human
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
-	possible_mmb_intents = list(INTENT_STEAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE, INTENT_GIVE)
+	possible_mmb_intents = list(INTENT_SPECIAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE, INTENT_GIVE)
 	can_buckle = TRUE
 	buckle_lying = FALSE
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
@@ -122,6 +122,10 @@
 
 	var/list/img_gallery = list()
 	
+
+	var/nsfw_headshot_link = null //TA edit
+
+	var/has_confessed = FALSE // Used to track if they have confessed it was written onto a confession paper
 
 	possible_rmb_intents = list(/datum/rmb_intent/feint,\
 	/datum/rmb_intent/aimed,\

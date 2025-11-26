@@ -20,6 +20,7 @@
 	min_pq = -5 //squires aren't great but they can do some damage
 	max_pq = null
 	round_contrib_points = 2
+	same_job_respawn_delay = 30 MINUTES
 
 	cmode_music = 'sound/music/combat_squire.ogg'
 	job_subclasses = list(
@@ -31,6 +32,7 @@
 /datum/outfit/job/roguetown/squire
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guard
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced
+	saiga_shoes = /obj/item/clothing/shoes/roguetown/horseshoes
 	belt = /obj/item/storage/belt/rogue/leather
 	beltl = /obj/item/storage/keyring/squire
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/guard

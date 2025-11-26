@@ -3,7 +3,7 @@
 	icon = 'icons/roguetown/items/books.dmi'
 	icon_state = "basic_book_0"
 	slot_flags = ITEM_SLOT_HIP
-	var/base_icon_state = "basic_book"
+	base_icon_state = "basic_book"
 	unique = TRUE
 	firefuel = 5 MINUTES
 	dropshrink = 0.6
@@ -341,13 +341,6 @@
 	icon_state ="book6_0"
 	base_icon_state = "book6"
 	bookfile = "thefireisgone.json"
-
-/obj/item/book/rogue/blackoak
-	name = "The Noblest Struggle"
-	desc = "A small black book. All Black Oaks carry this close."
-	icon_state ="book_0"
-	base_icon_state = "book"
-	bookfile = "blackoak.json"
 
 //player made books
 /obj/item/book/rogue/tales1

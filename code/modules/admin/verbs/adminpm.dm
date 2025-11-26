@@ -1,5 +1,5 @@
 #define IRCREPLYCOUNT 2
-
+#define IRC_AHELP_USAGE "Usage: ticket <close|resolve|icissue|mentorissue|reject|reopen \[ticket #\]|list>"
 
 //allows right clicking mobs to send an admin PM to their client, forwards the selected mob's client to cmd_admin_pm
 /client/proc/cmd_admin_pm_context(mob/M in GLOB.mob_list)
@@ -171,6 +171,8 @@
 				admin_ticket_log(src, "<font color='red'>[replymsg]</font>", "<font color='red'>[replymsg]</font>")
 				to_chat(recipient, span_danger("[replymsg]"))
 				to_chat(src, span_notice("PM to-<b>Admins</b>: <span class='linkify'>[msg]</span>"))
+			
+			SEND_SOUND(recipient, sound('sound/adminhelp.ogg'))
 
 			//play the receiving admin the adminhelp sound (if they have them enabled)
 			if(recipient.prefs.toggles & SOUND_ADMINHELP)
@@ -221,7 +223,6 @@
 		else
 			adminhelp(reply)													//sender has left, adminhelp instead
 
-#define IRC_AHELP_USAGE "Usage: ticket <close|resolve|icissue|mentorissue|reject|reopen \[ticket #\]|list>"
 /proc/IrcPm(target,msg,sender)
 	target = ckey(target)
 	var/client/C = GLOB.directory[target]
@@ -331,3 +332,4 @@
 	return	stealth
 
 #undef IRCREPLYCOUNT
+#undef IRC_AHELP_USAGE

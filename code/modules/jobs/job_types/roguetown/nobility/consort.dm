@@ -20,6 +20,7 @@
 	min_pq = 5
 	max_pq = null
 	round_contrib_points = 3
+	same_job_respawn_delay = 30 MINUTES
 
 /datum/job/roguetown/exlady
 	title = "Consort Dowager"
@@ -59,6 +60,7 @@
 		beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 		backr = /obj/item/storage/backpack/rogue/satchel
 		id = /obj/item/clothing/ring/silver
+	saiga_shoes = /obj/item/clothing/shoes/roguetown/horseshoes/gold
 	H.adjust_skillrank(/datum/skill/misc/stealing, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)

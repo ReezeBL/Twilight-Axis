@@ -268,7 +268,7 @@ SUBSYSTEM_DEF(treasury)
 	SStreasury.log_to_steward("+[amt] exported [D.name]")
 	record_round_statistic(STATS_STOCKPILE_EXPORTS_VALUE, amt)
 	if(!silent && amt >= EXPORT_ANNOUNCE_THRESHOLD) //Only announce big spending.
-		scom_announce("Azure Peak exports [D.name] for [amt] mammon.")
+		scom_announce("Twilight Axis exports [D.name] for [amt] mammon.")
 	D.lower_demand()
 	return amt
 
@@ -286,7 +286,7 @@ SUBSYSTEM_DEF(treasury)
 			var/exported = do_export(D, TRUE)
 			total_value_exported += exported
 	if(total_value_exported >= EXPORT_ANNOUNCE_THRESHOLD)
-		scom_announce("Azure Peak exports [total_value_exported] mammons of surplus goods.")
+		scom_announce("Twilight Axis exports [total_value_exported] mammons of surplus goods.")
 
 /datum/controller/subsystem/treasury/proc/remove_person(mob/living/person)
 	noble_incomes -= person
@@ -348,3 +348,11 @@ SUBSYSTEM_DEF(treasury)
 	treasury_value -= amt
 	log_to_steward("-[amt] withdrawn from treasury by [target]")
 	return TRUE
+
+#undef RURAL_TAX
+#undef TREASURY_TICK_AMOUNT
+#undef EXPORT_ANNOUNCE_THRESHOLD
+#undef TAX_CAT_NOBLE
+#undef TAX_CAT_CHURCH
+#undef TAX_CAT_YEOMEN
+#undef TAX_CAT_PEASANTS

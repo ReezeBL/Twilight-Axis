@@ -1,9 +1,3 @@
-////click cooldowns, in tenths of a second, used for various combat actions
-//#define CLICK_CD_EXHAUSTED 35
-//#define CLICK_CD_MELEE 12
-//#define CLICK_CD_RANGE 4
-//#define CLICK_CD_RAPID 2
-
 /datum/intent
 	var/name = "intent"
 	var/desc = ""
@@ -26,6 +20,8 @@
 	var/noaa = FALSE //turns off auto aiming, also turns off the 'swooshes'
 	var/warnie = ""
 	var/pointer = 'icons/effects/mousemice/human_attack.dmi'
+	var/charge_pointer = null // Simple unique charge icon
+	var/charged_pointer = null // Simple unique charged icon
 	var/clickcd = CLICK_CD_MELEE //the cd invoked clicking on stuff with this intent
 	var/recovery = 0		//RTD unable to move for this duration after an attack without becoming off balance
 	var/list/charge_invocation //list of stuff to say while charging
@@ -653,7 +649,3 @@
 	intent_effect = /datum/status_effect/debuff/dazed
 	target_parts = list(BODY_ZONE_HEAD)
 	intent_intdamage_factor = BLUNT_DEFAULT_INT_DAMAGEFACTOR
-
-/*/datum/intent/effect/daze/shield
-	intent_effect = /datum/status_effect/debuff/dazed/shield
-	swingdelay = 3 */

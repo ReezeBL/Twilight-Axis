@@ -19,13 +19,14 @@
 	advclass_cat_rolls = list(CTAG_SERGEANT = 20)
 
 	give_bank_account = TRUE
-	min_pq = 6
+	min_pq = 8
 	max_pq = null
 	cmode_music = 'sound/music/combat_ManAtArms.ogg'
 	job_traits = list(TRAIT_GUARDSMAN, TRAIT_STEELHEARTED, TRAIT_MEDIUMARMOR)
 	job_subclasses = list(
 		/datum/advclass/sergeant/sergeant
 	)
+	same_job_respawn_delay = 30 MINUTES
 
 /datum/outfit/job/roguetown/sergeant
 	job_bitflag = BITFLAG_GARRISON
@@ -50,6 +51,7 @@
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/guard
 	neck = /obj/item/clothing/neck/roguetown/gorget
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather/reinforced
+	saiga_shoes = /obj/item/clothing/shoes/roguetown/horseshoes
 	belt = /obj/item/storage/belt/rogue/leather
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	gloves = /obj/item/clothing/gloves/roguetown/plate/iron
