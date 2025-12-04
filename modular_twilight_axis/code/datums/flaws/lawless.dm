@@ -13,7 +13,7 @@
 
     if(get_playerquality(user.ckey, FALSE) < required_pq || (!(user.job in allowed_jobs)))
         user.charflaw = new /datum/charflaw/randflaw
-        user.charflaw.on_mob_creation(user)
+        user.charflaw.apply_post_equipment(user)
         return
     
     var/list/states = list(
