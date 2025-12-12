@@ -47,7 +47,7 @@
 	embedchance = 0
 	woundclass = BCLASS_STAB
 	flag = "blunt"
-	armor_penetration = 105
+	armor_penetration = 5
 	speed = 0.1
 
 /obj/projectile/bullet/twilight_grapeshot
@@ -63,7 +63,7 @@
 	embedchance = 100
 	woundclass = BCLASS_STAB
 	flag = "stab"
-	armor_penetration = 75
+	armor_penetration = 40
 	speed = 0.1
 	critfactor = 0.67
 
