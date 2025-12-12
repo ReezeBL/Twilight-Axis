@@ -21,7 +21,7 @@
 	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
 	embedchance = 100
 	woundclass = BCLASS_STAB
-	flag = "piercing"
+	flag = "stab"
 	armor_penetration = 40
 	speed = 0.1
 
@@ -46,7 +46,7 @@
 	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
 	embedchance = 0
 	woundclass = BCLASS_STAB
-	flag = "piercing"
+	flag = "blunt"
 	armor_penetration = 105
 	speed = 0.1
 
@@ -62,7 +62,7 @@
 	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
 	embedchance = 100
 	woundclass = BCLASS_STAB
-	flag = "piercing"
+	flag = "stab"
 	armor_penetration = 75
 	speed = 0.1
 	critfactor = 0.67
@@ -164,59 +164,59 @@
 				if(M == firer)
 					damage *= 2
 					armor_penetration *= 2
+					if(!istype(T.get_inactive_held_item(), /obj/item/rogueweapon/shield) && !istype(T.get_active_held_item(), /obj/item/rogueweapon/shield) && (blocked == 0))
+						switch(gunpowder) //Hande gunpowder types that are BLOCKED by shields and armor
+							if("fyrepowder")
+								if(istype(src, /obj/projectile/bullet/twilight_grapeshot))
+									T.adjust_fire_stacks(2)
+								else
+									T.adjust_fire_stacks(5)
+								T.ignite_mob()
+							if("holy fyrepowder")
+								if(HAS_TRAIT(T, TRAIT_SILVER_WEAK))
+									if(!T.has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder))
+										if(T.patron)
+											to_chat(T, span_danger("The trice-cursed Otavan silver! By [T.patron.name], it hurts!!"))
+										else
+											to_chat(T, span_danger("The trice-cursed Otavan silver! By all that's holy, it hurts!!"))
+									if(istype(src, /obj/projectile/bullet/twilight_grapeshot))
+										T.adjust_fire_stacks(2, /datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
+									else
+										T.adjust_fire_stacks(5, /datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
+								else
+									if(istype(src, /obj/projectile/bullet/twilight_grapeshot))
+										T.adjust_fire_stacks(2, /datum/status_effect/fire_handler/fire_stacks/divine)
+									else
+										T.adjust_fire_stacks(5, /datum/status_effect/fire_handler/fire_stacks/divine)
+								T.ignite_mob()
+							if("thunderpowder")
+								T.Immobilize(30)
+								T.apply_status_effect(/datum/status_effect/debuff/thunderpowder)
+							if("corrosive gunpowder")
+								playsound(src, 'sound/misc/drink_blood.ogg', 100)
+								T.apply_status_effect(/datum/status_effect/debuff/corrosivesplash)
+								new /obj/effect/temp_visual/acidsplash(get_turf(T))
+							if("arcyne gunpowder")
+								if(ishuman(T))
+									var/mob/living/carbon/human/H = T
+									if(istype(H.wear_ring, /obj/item/clothing/ring/fate_weaver))
+										H.wear_ring.obj_break()
+									H.set_silence(5 SECONDS)
+							if("terrorpowder")
+								gunpowder_npc_critfactor += 1
+					else
+						switch(gunpowder) //Hande gunpowder types that are NOT BLOCKED by shields and armor
+							if("corrosive gunpowder")
+								playsound(src, 'sound/misc/drink_blood.ogg', 100)
+								T.apply_status_effect(/datum/status_effect/debuff/corrosivesplash)
+								new /obj/effect/temp_visual/acidsplash(get_turf(T))
+							if("terrorpowder")
+								gunpowder_npc_critfactor += 1
+					if(!T.mind)
+						damage *= gunpowder_npc_critfactor
 				else
-					T.visible_message(span_danger("The [src.name] misses [T] narrowly, grazing them!, \
+					T.visible_message(span_danger("The [src.name] misses [T] narrowly, grazing them!"), \
 									span_danger("The [src.name] misses me narrowly, grazing me!"), null, COMBAT_MESSAGE_RANGE)
-		if(!istype(T.get_inactive_held_item(), /obj/item/rogueweapon/shield) && !istype(T.get_active_held_item(), /obj/item/rogueweapon/shield) && (blocked == 0))
-			switch(gunpowder) //Hande gunpowder types that are BLOCKED by shields and armor
-				if("fyrepowder")
-					if(istype(src, /obj/projectile/bullet/twilight_grapeshot))
-						T.adjust_fire_stacks(2)
-					else
-						T.adjust_fire_stacks(5)
-					T.ignite_mob()
-				if("holy fyrepowder")
-					if(HAS_TRAIT(T, TRAIT_SILVER_WEAK))
-						if(!T.has_status_effect(/datum/status_effect/fire_handler/fire_stacks/sunder))
-							if(T.patron)
-								to_chat(T, span_danger("The trice-cursed Otavan silver! By [T.patron.name], it hurts!!"))
-							else
-								to_chat(T, span_danger("The trice-cursed Otavan silver! By all that's holy, it hurts!!"))
-						if(istype(src, /obj/projectile/bullet/twilight_grapeshot))
-							T.adjust_fire_stacks(2, /datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
-						else
-							T.adjust_fire_stacks(5, /datum/status_effect/fire_handler/fire_stacks/sunder/blessed)
-					else
-						if(istype(src, /obj/projectile/bullet/twilight_grapeshot))
-							T.adjust_fire_stacks(2, /datum/status_effect/fire_handler/fire_stacks/divine)
-						else
-							T.adjust_fire_stacks(5, /datum/status_effect/fire_handler/fire_stacks/divine)
-					T.ignite_mob()
-				if("thunderpowder")
-					T.Immobilize(30)
-					T.apply_status_effect(/datum/status_effect/debuff/thunderpowder)
-				if("corrosive gunpowder")
-					playsound(src, 'sound/misc/drink_blood.ogg', 100)
-					T.apply_status_effect(/datum/status_effect/debuff/corrosivesplash)
-					new /obj/effect/temp_visual/acidsplash(get_turf(T))
-				if("arcyne gunpowder")
-					if(ishuman(T))
-						var/mob/living/carbon/human/H = T
-						if(istype(H.wear_ring, /obj/item/clothing/ring/fate_weaver))
-							H.wear_ring.obj_break()
-						H.set_silence(5 SECONDS)
-				if("terrorpowder")
-					gunpowder_npc_critfactor += 1
-		else
-			switch(gunpowder) //Hande gunpowder types that are NOT BLOCKED by shields and armor
-				if("corrosive gunpowder")
-					playsound(src, 'sound/misc/drink_blood.ogg', 100)
-					T.apply_status_effect(/datum/status_effect/debuff/corrosivesplash)
-					new /obj/effect/temp_visual/acidsplash(get_turf(T))
-				if("terrorpowder")
-					gunpowder_npc_critfactor += 1
-		if(!T.mind)
-			damage *= gunpowder_npc_critfactor
 	. = ..()
 	if(isliving(firer) && (istype(fired_from, /obj/item/gun/ballistic/twilight_firearm) || istype(fired_from, /obj/item/gun/ballistic/revolver/grenadelauncher/twilight_runelock)))
 		var/mob/living/M = firer
