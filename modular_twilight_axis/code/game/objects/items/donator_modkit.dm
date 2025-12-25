@@ -31,17 +31,23 @@
 /obj/item/enchantingkit/ravoxhelm_oldrw
 	name = "'Plumed Ravox Helmet' morphing elixer'"
 	desc = "A small container of special morphing dust, perfect to make a specifc item. Required: Heavy Helmet"
-	target_items = list(/obj/item/clothing/head/roguetown/helmet/heavy = /obj/item/clothing/head/roguetown/helmet/heavy/ravoxhelm/oldrw)
+	target_items = list(
+		/obj/item/clothing/head/roguetown/helmet/heavy = /obj/item/clothing/head/roguetown/helmet/heavy/ravoxhelm/oldrw,
+		/obj/item/clothing/head/roguetown/helmet/heavy/ravoxhelm = /obj/item/clothing/head/roguetown/helmet/heavy/ravoxhelm/oldrw)
 
 /obj/item/enchantingkit/necranhelm_oldrw
 	name = "'Hooded Necra Helmet' morphing elixer'"
 	desc = "A small container of special morphing dust, perfect to make a specifc item. Required: Heavy Helmet"
-	target_items = list(/obj/item/clothing/head/roguetown/helmet/heavy = /obj/item/clothing/head/roguetown/helmet/heavy/necran/oldrw)
+	target_items = list(
+		/obj/item/clothing/head/roguetown/helmet/heavy = /obj/item/clothing/head/roguetown/helmet/heavy/necran/oldrw,
+		/obj/item/clothing/head/roguetown/helmet/heavy/necran = /obj/item/clothing/head/roguetown/helmet/heavy/necran/oldrw)
 
 /obj/item/enchantingkit/astratanhelm_oldrw
 	name = "'Plumed Astrata Helmet' morphing elixer'"
 	desc = "A small container of special morphing dust, perfect to make a specifc item. Required: Heavy Helmet"
-	target_items = list(/obj/item/clothing/head/roguetown/helmet/heavy = /obj/item/clothing/head/roguetown/helmet/heavy/astratan/oldrw)
+	target_items = list(
+		/obj/item/clothing/head/roguetown/helmet/heavy = /obj/item/clothing/head/roguetown/helmet/heavy/astratan/oldrw,
+		/obj/item/clothing/head/roguetown/helmet/heavy/astratan = /obj/item/clothing/head/roguetown/helmet/heavy/astratan/oldrw)
 
 //Jägerbüchse - Arquebus
 /obj/item/enchantingkit/jagerrifle
