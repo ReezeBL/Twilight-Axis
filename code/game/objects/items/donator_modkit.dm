@@ -61,7 +61,8 @@
 
 /obj/item/enchantingkit/strudel2
 	name = "'Xylixian Fasching Leotard' morphing elixir"
-	target_items = list(/obj/item/clothing/cloak/templar/xylixian/)
+	desc = "A small container of special morphing dust, perfect to make a specifc item. Required: Xylixian Cloak"
+	target_items = list(/obj/item/clothing/cloak/templar/xylixian)
 	result_item = /obj/item/clothing/cloak/templar/xylixian/faux
 
 //Bat - Custom harp type

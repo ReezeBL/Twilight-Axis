@@ -812,17 +812,16 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	path = /obj/item/enchantingkit/srusu
 	donatitem = TRUE
 
-/datum/loadout_item/donator_strudel2
-	name = "Donator Kit - Xylixian Fasching Leotard"
-	category = list("Разное", "Донат")
-	path = /obj/item/enchantingkit/strudel2
-	ckeywhitelist = list("toasterstrudes")
-	donatitem = TRUE
-
 /datum/loadout_item/donator_strudel
 	name = "Donator Kit - Grenzelhoftian Mage Vest - Required: Robe(No Small Races)"
 	category = list("Разное", "Донат")
-	path = /obj/item/enchantingkit/strudle
+	path = /obj/item/enchantingkit/strudel1
+	donatitem = TRUE
+
+/datum/loadout_item/donator_strudel2
+	name = "Donator Kit - Xylixian Fasching Leotard - Required: Xylixian Cloak(Only woman, no small races)"
+	category = list("Разное", "Донат")
+	path = /obj/item/enchantingkit/strudel2
 	donatitem = TRUE
 
 /datum/loadout_item/donator_bat
