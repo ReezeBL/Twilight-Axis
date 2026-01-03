@@ -17,10 +17,17 @@
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/wretch/twilight_corsair
 	category_tags = list(CTAG_WRETCH)
-	traits_applied = list(TRAIT_FIREARMS_MARKSMAN, TRAIT_STEELHEARTED, TRAIT_DODGEEXPERT, TRAIT_OUTLAW, TRAIT_HERESIARCH)
+	traits_applied = list(TRAIT_FIREARMS_MARKSMAN, TRAIT_DODGEEXPERT)
 	maximum_possible_slots = 2
-	classes = list("Corsair" = "During the Twilight War, you served aboard a Reichsmarine warship, intercepting, boarding and ravaging Golden Empire's trade vessels on Kaiser's orders. After the war ended, your crew saw it fit to continue with the practice, flying a flag with a different shade of black.",
-					"Naked blade" = "For a long time you plundered ships of various flags and origins, burning through your lyfe on the islands of Kazengun. After your peak, you were smashed against the rocks of battles and had to flee further from your native seas to foreign lands to continue your trade.")
+	classes = list("Corsair" = "During the Twilight War, you served aboard a Reichsmarine warship, intercepting, \
+	boarding and ravaging Golden Empire's trade vessels on Kaiser's orders. \
+	After the war ended, your crew saw it fit to continue with the practice, flying a flag with a different shade of black.",
+	
+	"Naked Blade" = "For a long time you plundered ships of various flags and origins, \
+	burning through your lyfe on the islands of Kazengun. \
+	After your peak, you were smashed against the rocks of battles and had to flee further from your native seas \
+	to foreign lands to continue your trade.")
+
 	cmode_music = 'modular_twilight_axis/firearms/sound/music/combat_corsair.ogg'
 	subclass_stats = list(
 		STATKEY_WIL = 2,
@@ -49,7 +56,7 @@
 /datum/outfit/job/roguetown/wretch/twilight_corsair/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.adjust_blindness(-3)
-	var/classes = list("Corsair","Naked blade")
+	var/classes = list("Corsair", "Naked Blade")
 	var/classchoice = input("Choose your archetypes", "Available archetypes") as anything in classes
 
 	switch(classchoice)
@@ -72,7 +79,8 @@
 			mask = /obj/item/clothing/mask/rogue/facemask/steel
 			backpack_contents = list(/obj/item/twilight_powderflask = 1, /obj/item/natural/cloth = 1, /obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/rope/chain = 1, /obj/item/storage/belt/rogue/pouch/coins/poor = 1)
 			H.grant_language(/datum/language/grenzelhoftian)
-		if("Naked blade")
+
+		if("Naked Blade")
 			H.set_blindness(0)
 			mask = /obj/item/clothing/mask/rogue/facemask/steel/kazengun
 			pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants2
