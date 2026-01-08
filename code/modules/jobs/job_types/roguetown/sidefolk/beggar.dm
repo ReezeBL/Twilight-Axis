@@ -1,7 +1,7 @@
 /datum/job/roguetown/beggar
 	title = "Beggar"
-	flag = BEGGAR
-	department_flag = PEASANTS
+	flag = VAGABOND
+	department_flag = SIDEFOLK
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
